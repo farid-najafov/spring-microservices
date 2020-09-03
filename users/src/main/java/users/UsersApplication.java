@@ -15,7 +15,7 @@ import users.shared.FeignErrorDecoder;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-@EnableHystrix
+//@EnableHystrix
 public class UsersApplication {
     
     public static void main(String[] args) {
@@ -38,8 +38,8 @@ public class UsersApplication {
         return Logger.Level.FULL;
     }
     
-    @Bean
-    public FeignErrorDecoder getFeignErrorDecoder() {
-        return new FeignErrorDecoder();
-    }
+//    @Bean
+//    public FeignErrorDecoder getFeignErrorDecoder() {
+//        return new FeignErrorDecoder();
+//    }
 }
