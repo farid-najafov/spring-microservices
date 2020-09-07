@@ -4,13 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import users.data.AlbumsServiceClient;
 import users.data.UserEntity;
 import users.data.UserRepository;
@@ -28,7 +32,7 @@ public class UserService implements UserDetailsService {
     
     private final UserRepository userRepo;
     private final BCryptPasswordEncoder encoder;
-    //    private final RestTemplate rest;
+    private final RestTemplate rest;
     private final Environment env;
     private final AlbumsServiceClient albumsServiceClient;
     
@@ -82,14 +86,14 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(
                         String.format("User with id: %s is not found in our system", userId)
                 ));
-        /*
-        String albumsUrl = String.format(env.getProperty("albums.url"), userId);;
-        ResponseEntity<List<AlbumResponseModel>> albumsResp = rest.exchange(albumsUrl,
-                                                                        HttpMethod.GET,
-                                                                        null,
-                                                                        new ParameterizedTypeReference<>() {});
-        List<AlbumResponseModel> albums = albumsResp.getBody();
-        */
+        
+//        String albumsUrl = String.format(env.getProperty("albums.url"), userId);;
+//        ResponseEntity<List<AlbumResponseModel>> albumsResp = rest.exchange(albumsUrl,
+//                                                                        HttpMethod.GET,
+//                                                                        null,
+//                                                                        new ParameterizedTypeReference<>() {});
+//        List<AlbumResponseModel> albums = albumsResp.getBody();
+        
         
         log.info("Before calling albums Microservice");
         List<AlbumResponseModel> albums = albumsServiceClient.getAlbums(userId);

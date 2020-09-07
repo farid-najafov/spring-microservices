@@ -12,10 +12,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Component
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 public class FeignErrorDecoder implements ErrorDecoder {
 	
-	private Environment env;
+	private final Environment env;
 
 	@Override
 	public Exception decode(String methodKey, Response response) {
