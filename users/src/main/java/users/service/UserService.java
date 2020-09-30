@@ -94,7 +94,6 @@ public class UserService implements UserDetailsService {
 //                                                                        new ParameterizedTypeReference<>() {});
 //        List<AlbumResponseModel> albums = albumsResp.getBody();
         
-        
         log.info("Before calling albums Microservice");
         List<AlbumResponseModel> albums = albumsServiceClient.getAlbums(userId);
         log.info("After calling albums Microservice");
